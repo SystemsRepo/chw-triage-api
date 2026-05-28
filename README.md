@@ -60,8 +60,19 @@ pip install -r requirements.txt
 
 ### 2. Start PostgreSQL
 
+If port 5432 is free on your machine:
+```bash
+docker run -d --name chw-pg \
+  -e POSTGRES_DB=chw_triage \
+  -e POSTGRES_USER=chw_user \
+  -e POSTGRES_PASSWORD=chw_pass \
+  -p 5432:5432 postgres:15-alpine
+```
+
+Or use docker-compose (maps to host port 5433 to avoid conflicts):
 ```bash
 docker-compose up -d db
+# Then set: DATABASE_URL=postgresql://chw_user:chw_pass@localhost:5433/chw_triage
 ```
 
 ### 3. Configure environment
